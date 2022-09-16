@@ -28,13 +28,13 @@ public class Zadatak3 {
 		driver.manage().window().maximize();
 
 		driver.get("https://seeds.sproutsocial.com/components/loader-button/");
-		WebElement hoverable = driver.findElement(By.xpath("//*[text()='Click me to load!']"));
-		new Actions(driver).moveToElement(hoverable).perform();
-
 		
-		driver.findElement(By.xpath("//*[text()='Click me to load!']")).click();
-		System.out.println("Klik!");
+		WebElement hoverable = driver.findElement(By.xpath("//div[text()='Click me to load!']"));
+		new Actions(driver).moveToElement(hoverable).perform();
+	
 		try {
+			driver.findElement(By.xpath("//button[@data-qa-button-isloading='false']")).click();
+			System.out.println("Klik!");
 			driver.findElement(By.xpath("//button[@data-qa-button-isloading='false']"));
 			System.out.println("Finish!");
 		} catch (Exception e) {
