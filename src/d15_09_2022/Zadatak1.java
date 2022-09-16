@@ -31,6 +31,8 @@ public class Zadatak1 {
 		int brojac = lista.size();
 		WebElement pomocni;
 		
+		//BRIŠE OD POSLEDNJEG
+		
 		for (int i = 0; i < brojac; i++) {
 			pomocni = lista.get(lista.size() - 1);
 			lista.get(lista.size() - 1).click();

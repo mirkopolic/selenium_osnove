@@ -31,6 +31,9 @@ public class Zadatak1a {
 
 		int brojac = lista.size();
 		WebElement pomocni;
+		
+		//BRIŠE UVEK PRVI
+		
 		for (int i = 0; i < brojac; i++) {
 
 			pomocni = lista.get(0);
