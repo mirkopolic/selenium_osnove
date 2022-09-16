@@ -2,7 +2,6 @@ package d15_09_2022;
 
 import java.time.Duration;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,27 +29,18 @@ public class Zadatak3 {
 
 		driver.get("https://seeds.sproutsocial.com/components/loader-button/");
 		WebElement hoverable = driver.findElement(By.xpath("//*[text()='Click me to load!']"));
-		// WebElement hoverable = driver.findElement(By.xpath("//*[text()='Loader
-		// buttons are used to display a loading indicator inside of a button.']"));
 		new Actions(driver).moveToElement(hoverable).perform();
 
-//		
-
-		for (int i = 0; i < 5; i++) {
-			if (driver.findElement(By.xpath("//*[text()='Click me to load!']/../..")).isEnabled()) {
-				try {
-					driver.findElement(By.xpath("//*[text()='Click me to load!']")).click();
-					System.out.println("Klik!");
-				} catch (Exception e) {
-					System.out.println("Greška!");
-				}
-			}else {
-				Thread.sleep(5000);
-			}
+		
+		driver.findElement(By.xpath("//*[text()='Click me to load!']")).click();
+		System.out.println("Klik!");
+		try {
+			driver.findElement(By.xpath("//button[@data-qa-button-isloading='false']"));
+			System.out.println("Finish!");
+		} catch (Exception e) {
+			System.out.println("Greška!");
 		}
 		
-		
-
 		Thread.sleep(5000);
 		driver.quit();
 	}
