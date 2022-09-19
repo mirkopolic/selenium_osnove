@@ -55,26 +55,33 @@ driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 driver.manage().window().maximize();
 
+//Kreira listu sa slikama
 List<File> slike = new ArrayList<File>();
 slike.add(new File("img/front_slika.jpg"));
 slike.add(new File("img/left_slika.jpg"));
 slike.add(new File("img/right_slika.jpg"));
 slike.add(new File("img/back_slika.jpg"));
 
+//Otvoti stranicu
 driver.get("https://boomf.com/apps/proxy/boomf-bomb/i-bloody-love-you");
-String path = "";
+
+//Petlja u kojoj se vrši sledece:
+//Klikne u (imgNumber) polje 
+//Saceka da se otvoti novi prozor za dodavanje slika
+//Ucita sliku iz liste i klikne na ucitanu sliku
+//Saceka novi prozor i klikne na polje (Use One Side Only)
+//Saceka novi prozor i klikne na polje (Done)
 
 for (int i = 0; i < 4; i++) {
-	int broj = i + 1;
-	driver.findElement(By.xpath("//*[@alt='image " + broj + "']")).click();
+	int imgNumber = i + 1;
+	driver.findElement(By.xpath("//*[@alt='image " + imgNumber + "']")).click();
 	if (i == 0) {
 		driver.findElement(By.xpath("//*[@alt='Front']")).click();
 	} else {
 		driver.findElement(By.xpath("//*[text()='+ Add Image']")).click();
 	}
 	wait.until(ExpectedConditions.presenceOfElementLocated(By.id("imageUpload")));
-	path=slike.get(i).getAbsolutePath();
-	driver.findElement(By.id("imageUpload")).sendKeys(path);
+	driver.findElement(By.id("imageUpload")).sendKeys(slike.get(i).getAbsolutePath());
 	driver.findElement(By.xpath("//*[@loading='lazy'][last()]")).click();
 	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Use One Side Only']")));
 	driver.findElement(By.xpath("//*[text()='Use One Side Only']")).click();
@@ -82,11 +89,15 @@ for (int i = 0; i < 4; i++) {
 	driver.findElement(By.xpath("//*[text()='Done']")).click();
 }
 
+//Dodaje random Confetti efekat
 Random random = new Random();
 int x = random.nextInt(5);
 driver.findElement(By.xpath("//div[@name='" + x + "']")).click();
-driver.findElement(By.xpath("//*[contains(@class, 'sc-bczRLJ')]")).click();
 
+//Klikne na dugme (Add to cart)
+driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+//Proverava da li postoji tekst greske
 boolean elementPostoji = true;
 try {
 	driver.findElement(By.xpath("//*[@action='error']"));
@@ -94,9 +105,9 @@ try {
 	elementPostoji = false;
 }
 if (elementPostoji) {
-	System.out.println("Dijalog postoji.");
+	System.out.println("Postoji tekst greske!");
 } else {
-	System.out.println("Dijalog ne postoji.");
+	System.out.println("Ne postoji tekst greske!");
 }
 
 Thread.sleep(5000);
