@@ -163,7 +163,6 @@ public class BootstrapTableTests {
 
     }
 	
-
 		
 	@AfterMethod
 	public void afterMethod() {
