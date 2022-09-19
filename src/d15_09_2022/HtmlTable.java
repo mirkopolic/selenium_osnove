@@ -1,5 +1,8 @@
 package d15_09_2022;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebElement;
@@ -19,4 +22,16 @@ public class HtmlTable {
 
 	}
 
+	//public List<WebElement> getColumnsByName(String kolona) {
+	public void getColumnsByName(String kolona) {
+		ArrayList<String> listaIndexa = new ArrayList<String>();
+		for (int j = 0; j < 4; j++) {
+			
+		
+		listaIndexa.add(this.tabela.findElement(By.xpath("//thead/tr/th["+j+"]")).getText());
+		}
+	System.out.println(listaIndexa);	
+		
+//		return lista;
+	}
 }
